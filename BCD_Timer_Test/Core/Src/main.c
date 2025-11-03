@@ -211,16 +211,19 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, DIGIT_B3_Pin|DIGIT_B0_Pin|DIGIT_B1_Pin|DIGIT_B2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, DIGIT_B3_Pin|DIGIT_A2_Pin|DIGIT_B0_Pin|DIGIT_B1_Pin
+                          |DIGIT_B2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, DIGIT_A0_Pin|DIGIT_A1_Pin|DIGIT_A2_Pin|DIGIT_A3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, DIGIT_A0_Pin|DIGIT_A1_Pin|DIGIT_A3_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DIGIT_B3_Pin DIGIT_B0_Pin DIGIT_B1_Pin DIGIT_B2_Pin */
-  GPIO_InitStruct.Pin = DIGIT_B3_Pin|DIGIT_B0_Pin|DIGIT_B1_Pin|DIGIT_B2_Pin;
+  /*Configure GPIO pins : DIGIT_B3_Pin DIGIT_A2_Pin DIGIT_B0_Pin DIGIT_B1_Pin
+                           DIGIT_B2_Pin */
+  GPIO_InitStruct.Pin = DIGIT_B3_Pin|DIGIT_A2_Pin|DIGIT_B0_Pin|DIGIT_B1_Pin
+                          |DIGIT_B2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -233,8 +236,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DIGIT_A0_Pin DIGIT_A1_Pin DIGIT_A2_Pin DIGIT_A3_Pin */
-  GPIO_InitStruct.Pin = DIGIT_A0_Pin|DIGIT_A1_Pin|DIGIT_A2_Pin|DIGIT_A3_Pin;
+  /*Configure GPIO pins : DIGIT_A0_Pin DIGIT_A1_Pin DIGIT_A3_Pin */
+  GPIO_InitStruct.Pin = DIGIT_A0_Pin|DIGIT_A1_Pin|DIGIT_A3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -281,11 +284,11 @@ void DIGITS_Display(uint8_t DIGIT_A, uint8_t DIGIT_B)
 	 }
 	 if (Abit2 == (0))
 	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A2_Pin, GPIO_PIN_RESET);
+		 HAL_GPIO_WritePin(GPIOC, DIGIT_A2_Pin, GPIO_PIN_RESET);
 	 }
 	 else
 	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A2_Pin, GPIO_PIN_SET);
+		 HAL_GPIO_WritePin(GPIOC, DIGIT_A2_Pin, GPIO_PIN_SET);
 
 	 }
 	 if (Abit3 == (0))
