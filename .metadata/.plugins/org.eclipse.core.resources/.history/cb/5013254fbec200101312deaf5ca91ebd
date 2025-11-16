@@ -63,8 +63,6 @@ volatile uint16_t time_edge1 = 0;
 volatile uint16_t time_edge2 = 0;
 
 volatile uint16_t time_diff = 0;
-volatile uint16_t rpm_tick_count = 0;
-
 uint8_t ultrasonic_msg_buffer[64] = {0};
 /* USER CODE END PV */
 
@@ -84,8 +82,8 @@ void HCSR04_TRIG_PULSE(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t byte;
-uint8_t value;
+volatile uint8_t byte;
+volatile uint8_t value;
 uint8_t rcv_intpt_flag = 0;
 
 Pipeline pipeline[PIPELINE_NUM];
@@ -136,18 +134,6 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Init(&htim2);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
-
-  TIM2 -> PSC = 16 - 1;
-  TIM2 -> ARR = 2000 - 1;
-  TIM2 -> CCR1 = 1200 - 1;
-  TIM2 -> CCR3 = 0;
-
-  int TIM2_Ch1_DCVAL = 0;
-  int TIM2_Ch2_DCVAL = 0;
-
   HAL_TIM_Base_Start_IT(&htim5);
   clock_hours = 0;
   clock_mins = 0;
@@ -237,11 +223,13 @@ int main(void)
 	  uint8_t counter = 0;
 	  while (1) {
 		  // Continuously print
+		  if (counter >= 23) {
+			  break;
+		  }
 
 		  if (wall_clock_hr_update_flag) {
 		  	  wall_clock_hr_update_flag = 0;
-
-		  	  if (OutputData[counter].pwm == 0 && OutputData[counter].value != ' ') {
+		  	  if (OutputData[counter].pwm == 0) {
 		  		  ADC_Select_CH(9);
 				  HAL_ADC_Start(&hadc1);
 				  HAL_ADC_PollForConversion(&hadc1, 1000);
@@ -251,16 +239,14 @@ int main(void)
 				  OutputData[counter].pwm = (ADC_CH9 * 100)/255;
 		  	  }
 
-		  	  TIM2 -> CCR1 = (TIM2 -> ARR * OutputData[counter].pwm) / 100;
-		  	  //we assume that the wall clock hour is updated every 20 seconds
-		  	  uint16_t rpm = get_rpm();
+
 
 		  	  //print out the information
 			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d |",  counter, OutputData[counter].value, OutputData[counter].pwm);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
 
-			  if (clock_hours == 23) {
+			  if (clock_hours == 24) {
 				  sprintf(irrigation_done_msg, "\r\n Irrigation completed. " );
 				  HAL_UART_Transmit(&huart2, (uint8_t *)irrigation_done_msg, strlen(irrigation_done_msg), HAL_MAX_DELAY);
 				  // I would add a while loop as the "end". Not the most efficient though.
@@ -904,14 +890,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
-uint16_t get_rpm(void)
+static void send_rpm_tick(void)
 {
+	char tick_msg_buffer[64];
 	__disable_irq();
-	uint32_t ticks = rpm_tick_count;
-	rpm_tick_count = 0;
-	uint16_t rpm = (ticks / 20) * 3;
-	return rpm;
+	uint16_t ticks = rpm_tick_count;
 	__enable_irq();
+
+	sprintf( tick_msg_buffer, "rpm_tick_count: %u\r\n", ticks);
+	HAL_UART_Transmit(&huart2, (uint8_t*)tick_msg_buffer, strlen(tick_msg_buffer), HAL_MAX_DELAY );
 }
 
 

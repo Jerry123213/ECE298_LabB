@@ -252,7 +252,6 @@ int main(void)
 		  	  }
 
 		  	  TIM2 -> CCR1 = (TIM2 -> ARR * OutputData[counter].pwm) / 100;
-		  	  //we assume that the wall clock hour is updated every 20 seconds
 		  	  uint16_t rpm = get_rpm();
 
 		  	  //print out the information

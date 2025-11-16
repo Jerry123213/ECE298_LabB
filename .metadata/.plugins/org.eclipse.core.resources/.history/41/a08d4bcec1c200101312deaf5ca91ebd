@@ -68,7 +68,7 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 void format_time(output output_data[24], Pipeline pipeline[4]);
 void ADC_Select_CH(int CH);
-uint32_t get_rpm(void);
+static void get_rpm(void);
 
 /* USER CODE END EFP */
 
