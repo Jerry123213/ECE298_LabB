@@ -197,18 +197,26 @@ int main(void)
 	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
 	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
 
+	  //set all values to ''
+	  for (int i = 0; i < 24; i++) {
+		  OutputData[i].value = ' ';
+	  }
+
+	  format_time(OutputData, pipeline);
+
+	  uint8_t counter = 0;
 	  while (1) {
 		  // Continuously print
 		  if (wall_clock_hr_update_flag) {
 		  	  wall_clock_hr_update_flag = 0;
 
-			  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
+			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d |",  counter, OutputData[counter].value, OutputData[counter].pwm);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
+			  counter++;
 		  }
-	  }
-    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  }
   }
   /* USER CODE END 3 */
 }
@@ -684,7 +692,6 @@ void format_time(output output_data[24], Pipeline pipeline[4]) {
 				case 3:
 					output_data[j].pwm = 99;
 					break;
-
 			}
 		}
 	}
