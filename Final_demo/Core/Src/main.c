@@ -36,8 +36,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 #define PIPELINE_NUM 4
-#define MIN_DEPTH 100
-#define MAX_DEPTH 1500
+#define MIN_DEPTH 2
+#define MAX_DEPTH 12
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -56,13 +56,6 @@ volatile uint8_t clock_mins = 0;
 
 volatile uint8_t wall_clock_hr_update_flag = 0;
 
-// hcsr04 variables
-volatile uint8_t hcsr04_Rx_flag = 0;
-volatile uint8_t first_edge = 0;
-volatile uint16_t time_edge1 = 0;
-volatile uint16_t time_edge2 = 0;
-
-volatile uint16_t time_diff = 0;
 uint8_t ultrasonic_msg_buffer[64] = {0};
 /* USER CODE END PV */
 
@@ -76,8 +69,7 @@ static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
-uint16_t getDistance();
-void HCSR04_TRIG_PULSE(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,6 +80,12 @@ uint8_t rcv_intpt_flag = 0;
 
 Pipeline pipeline[PIPELINE_NUM];
 output OutputData[23];
+
+// hcsr04 variables
+volatile uint8_t hcsr04_Rx_flag = 0;
+volatile uint8_t first_edge = 0;
+volatile uint16_t time_edge1 = 0;
+volatile uint16_t time_edge2 = 0;
 /* USER CODE END 0 */
 
 /**
@@ -104,6 +102,15 @@ int main(void)
 	char clk_msg_buffer[64] = {0};
 	char irrigation_done_msg[64] = {0};
 
+	uint16_t time_diff = 0;
+	uint16_t distance = 0;
+
+
+	void HCSR04_TRIG_PULSE(void) {
+		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_SET);
+		for (int i = 0; i != 15; i = i + 1) {};
+		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_RESET);
+	}
 
 
   /* USER CODE END 1 */
@@ -114,7 +121,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  uint16_t dist = 0;
+
 
   /* USER CODE END Init */
 
@@ -135,8 +142,14 @@ int main(void)
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim5);
+
+  HAL_TIM_Base_Init(&htim3);
+  HAL_TIM_Base_Start(&htim3);
+  HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
+
   clock_hours = 0;
   clock_mins = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -209,7 +222,7 @@ int main(void)
 	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
 	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
 
-	  clock_mins = 0; clock_hours = -1;
+	  clock_mins = 0; clock_hours = 0;
 	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
 	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
 
@@ -235,7 +248,23 @@ int main(void)
 				  OutputData[counter].pwm = (ADC_CH9 * 100)/255;
 		  	  }
 
-			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d |",  counter, OutputData[counter].value, OutputData[counter].pwm);
+		  	  // Distance sensor start
+		  	  hcsr04_Rx_flag = 0;
+		  	  first_edge = 0;
+		  	  time_edge1 = 0;
+		  	  time_edge2 = 0;
+		  	  time_diff = 0;
+
+		  	  HCSR04_TRIG_PULSE();
+
+		  	  while (hcsr04_Rx_flag == 0) {};
+
+		  	  time_diff = time_edge2 - time_edge1;
+		  	  distance = time_diff/58;
+		  	  distance = 120-(distance*10);
+		  	  // Distance sensor end
+
+			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, 0, distance);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
 
@@ -247,6 +276,8 @@ int main(void)
 			  }
 
 		  }
+
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 	  }
@@ -455,7 +486,7 @@ static void MX_TIM3_Init(void)
   {
     Error_Handler();
   }
-  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_BOTHEDGE;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
@@ -684,12 +715,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void HCSR04_TRIG_PULSE(void) {
-		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_SET);
-		for (int i = 0; i != 15; i = i + 1) {};
-		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_RESET);
-	}
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART2)
@@ -710,6 +735,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			clock_hours += 1;
 			clock_mins = 0;
 			wall_clock_hr_update_flag = 1;
+		}
+	}
+}
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+	if (htim -> Instance == TIM3) {
+		if (htim -> Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
+			if (first_edge == 0) {
+				time_edge1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+				first_edge = 1;
+			}
+			else {
+				time_edge2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+				__HAL_TIM_SET_COUNTER(htim, 0);
+				hcsr04_Rx_flag = 1;
+			}
 		}
 	}
 }
@@ -876,22 +917,6 @@ void ADC_Select_CH(int CH)
 }
 
 
-uint16_t getDistance()
-{
-	hcsr04_Rx_flag = 0;
-	first_edge = 0;
-	time_edge1 = 0;
-	time_edge2 = 0;
-	time_diff = 0;
-
-	HCSR04_TRIG_PULSE();
-
-	while (hcsr04_Rx_flag == 0) {};
-
-	time_diff = time_edge2 - time_edge1;
-
-	return time_diff;
-}
 /* USER CODE END 4 */
 
 /**
