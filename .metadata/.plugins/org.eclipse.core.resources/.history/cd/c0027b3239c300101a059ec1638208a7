@@ -308,10 +308,10 @@ int main(void)
 		  	  distance = time_diff/58;
 		  	  distance = 120-(distance*10);
 
-		  	  uint8_t tens = distance / 10;
-		  	  uint8_t ones = distance % 10;
+		  	  //TODO: display distance on timer board here
 
-		  	  DIGITS_Display(tens, ones);
+		  	  uint8_t tens = distance % 10;
+		  	  uint8_t ones = distance;
 
 		  	  if (distance == 0) {
 		  		  print_empty_error();

@@ -308,10 +308,7 @@ int main(void)
 		  	  distance = time_diff/58;
 		  	  distance = 120-(distance*10);
 
-		  	  uint8_t tens = distance / 10;
-		  	  uint8_t ones = distance % 10;
-
-		  	  DIGITS_Display(tens, ones);
+		  	  //TODO: display distance on timer board here
 
 		  	  if (distance == 0) {
 		  		  print_empty_error();
@@ -1045,6 +1042,7 @@ uint16_t get_rpm(void)
 	return rpm;
 }
 
+
 void print_empty_error (void) {
 	sprintf((char*)txd_msg_buffer, "\r\n *********************************" );
 	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
@@ -1054,96 +1052,6 @@ void print_empty_error (void) {
 
 	sprintf((char*)txd_msg_buffer, "\r\n *********************************" );
 	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
-}
-
-void DIGITS_Display(uint8_t DIGIT_A, uint8_t DIGIT_B)
-{
-	 uint8_t DIGITA_VAL = 0x0F & DIGIT_A; //mask off higher4 bits
-	 int Abit0 = (DIGITA_VAL ) & 1;  	// extract Abit0 of the 4-bit value
-	 int Abit1 = (DIGITA_VAL >> 1) & 1;  // extract Abit1 of the 4-bit value
-	 int Abit2 = (DIGITA_VAL >> 2) & 1;  // extract Abit2 of the 4-bit value
-	 int Abit3 = (DIGITA_VAL >> 3) & 1;  // extract Abit3 of the 4-bit value
-
-	 uint8_t DIGITB_VAL = 0x0F & DIGIT_B; //mask off higher4 bits
-	 int Bbit0 = (DIGITB_VAL ) & 1;  	// extract Bbit0 of the 4-bit value
-	 int Bbit1 = (DIGITB_VAL >> 1) & 1;  // extract Bbit1 of the 4-bit value
-	 int Bbit2 = (DIGITB_VAL >> 2) & 1;  // extract Bbit2 of the 4-bit value
-	 int Bbit3 = (DIGITB_VAL >> 3) & 1;  // extract Bbit3 of the 4-bit value
-
-	 if (Abit0 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A0_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A0_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Abit1 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A1_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A1_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Abit2 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_A2_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_A2_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Abit3 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A3_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOB, DIGIT_A3_Pin, GPIO_PIN_SET);
-
-	 }
-
-
-	 if (Bbit0 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B0_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B0_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Bbit1 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B1_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B1_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Bbit2 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B2_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B2_Pin, GPIO_PIN_SET);
-
-	 }
-	 if (Bbit3 == (0))
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B3_Pin, GPIO_PIN_RESET);
-	 }
-	 else
-	 {
-		 HAL_GPIO_WritePin(GPIOC, DIGIT_B3_Pin, GPIO_PIN_SET);
-
-	 }
 }
 /* USER CODE END 4 */
 
