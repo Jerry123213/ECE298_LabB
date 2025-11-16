@@ -47,6 +47,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
+TIM_HandleTypeDef htim9;
 
 UART_HandleTypeDef huart2;
 
@@ -69,6 +70,7 @@ static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM9_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -78,9 +80,13 @@ static void MX_TIM5_Init(void);
 uint8_t byte;
 uint8_t value;
 uint8_t rcv_intpt_flag = 0;
+volatile uint8_t rpm_time_out = 0;
+
 
 Pipeline pipeline[PIPELINE_NUM];
-output OutputData[23];
+output OutputData[24];
+uint8_t txd_msg_buffer[128] = {0};
+
 
 // hcsr04 variables
 volatile uint8_t hcsr04_Rx_flag = 0;
@@ -97,8 +103,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	uint8_t txd_msg_buffer[128] = {0};
-
 	char clk_label[128] = {0};
 	char clk_msg_buffer[64] = {0};
 	char irrigation_done_msg[64] = {0};
@@ -141,6 +145,7 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
+  MX_TIM9_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Init(&htim2);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
@@ -148,11 +153,9 @@ int main(void)
 
   TIM2 -> PSC = 16 - 1;
   TIM2 -> ARR = 2000 - 1;
-  TIM2 -> CCR1 = 1200 - 1;
-  TIM2 -> CCR3 = 0;
+  TIM2 -> CCR1 = 0;
+  TIM2 -> CCR2 = 0;
 
-  int TIM2_Ch1_DCVAL = 0;
-  int TIM2_Ch2_DCVAL = 0;
 
   HAL_TIM_Base_Start_IT(&htim5);
 
@@ -253,7 +256,8 @@ int main(void)
 		  if (wall_clock_hr_update_flag) {
 		  	  wall_clock_hr_update_flag = 0;
 
-		  	  if (OutputData[counter].pwm == 0 && OutputData[counter].value != ' ') {
+		  	  //adc start
+		  	  if (OutputData[counter].pwm == 0 && OutputData[counter].value != ' ') {	//only capture adc value if pipe is specified
 		  		  ADC_Select_CH(9);
 				  HAL_ADC_Start(&hadc1);
 				  HAL_ADC_PollForConversion(&hadc1, 1000);
@@ -261,6 +265,32 @@ int main(void)
 				  HAL_ADC_Stop(&hadc1);
 
 				  OutputData[counter].pwm = (ADC_CH9 * 100)/255;
+		  	  }
+		  	  //adc end
+
+		  	  // set motor PWM and LED color
+		  	  HAL_GPIO_WritePin(GPIOA, BLU_Pin|GRN_Pin|RED_Pin, GPIO_PIN_RESET);
+
+		  	  if (OutputData[counter].value == 0) {
+		  		  TIM2 -> CCR2 = 0;
+			  	  TIM2 -> CCR1 = (TIM2 -> ARR + 1) * OutputData[counter].pwm / 100;
+			  	  // set LED to purple
+			  	  HAL_GPIO_WritePin(GPIOA, BLU_Pin|RED_Pin, GPIO_PIN_SET);
+		  	  }
+		  	  else {
+		  		  TIM2 -> CCR1 = 0;
+		  		  TIM2 -> CCR2 = (TIM2 -> ARR + 1) * OutputData[counter].pwm / 100;
+		  		  switch (OutputData[counter].value) {
+		  		  	  case(1):
+						HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
+		  		  	  	break;
+		  		  	  case(2):
+						HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
+		  		  	  	break;
+		  		  	  case(3):
+						HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
+		  		  	  	break;
+		  		  }
 		  	  }
 
 		  	  // Distance sensor start
@@ -277,17 +307,25 @@ int main(void)
 		  	  time_diff = time_edge2 - time_edge1;
 		  	  distance = time_diff/58;
 		  	  distance = 120-(distance*10);
-		  	  // Distance sensor end
 
-			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, 0, distance);
+		  	  //TODO: display distance on timer board here
+
+		  	  if (distance == 0) {
+		  		  print_empty_error();
+		  		  break;
+		  	  }
+		  	  // Distance sensor end
+		  	  // read current rpm
+		  	  uint16_t rpm = get_rpm();
+
+			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, rpm, distance);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
 
 			  if (clock_hours == 23) {
 				  sprintf(irrigation_done_msg, "\r\n Irrigation completed. " );
 				  HAL_UART_Transmit(&huart2, (uint8_t *)irrigation_done_msg, strlen(irrigation_done_msg), HAL_MAX_DELAY);
-				  // I would add a while loop as the "end". Not the most efficient though.
-				  while (1) {}
+				  break;
 			  }
 
 		  }
@@ -296,6 +334,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  }
+
+	  while (1) {}
   }
   /* USER CODE END 3 */
 }
@@ -620,6 +660,44 @@ static void MX_TIM5_Init(void)
 }
 
 /**
+  * @brief TIM9 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM9_Init(void)
+{
+
+  /* USER CODE BEGIN TIM9_Init 0 */
+
+  /* USER CODE END TIM9_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+
+  /* USER CODE BEGIN TIM9_Init 1 */
+
+  /* USER CODE END TIM9_Init 1 */
+  htim9.Instance = TIM9;
+  htim9.Init.Prescaler = 16000-1;
+  htim9.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim9.Init.Period = 1000-1;
+  htim9.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim9.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim9) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim9, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM9_Init 2 */
+
+  /* USER CODE END TIM9_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -751,6 +829,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			clock_mins = 0;
 			wall_clock_hr_update_flag = 1;
 		}
+	}
+	else if ((htim -> Instance == TIM9)) {
+		rpm_time_out = 1;
 	}
 }
 
@@ -942,14 +1023,36 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 uint16_t get_rpm(void)
 {
 	__disable_irq();
-	uint32_t ticks = rpm_tick_count;
 	rpm_tick_count = 0;
-	uint16_t rpm = (ticks / 20) * 3;
-	return rpm;
+	rpm_time_out = 0;
+
+	TIM9 -> PSC = 16000 - 1;
+	TIM9 -> ARR = 1000 - 1;
+	HAL_TIM_Base_Start_IT(&htim9);
 	__enable_irq();
+
+	HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
+	while(rpm_time_out == 0) {}
+
+	HAL_NVIC_DisableIRQ(EXTI2_IRQn);
+	HAL_TIM_Base_Stop_IT(&htim9);
+
+	uint32_t rpm = rpm_tick_count * 3;
+	return rpm;
 }
 
 
+void print_empty_error (void) {
+	sprintf((char*)txd_msg_buffer, "\r\n *********************************" );
+	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
+
+	sprintf((char*)txd_msg_buffer, "\r\n ******  RESEVOIR IS EMPTY  ******" );
+	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
+
+	sprintf((char*)txd_msg_buffer, "\r\n *********************************" );
+	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
+}
 /* USER CODE END 4 */
 
 /**

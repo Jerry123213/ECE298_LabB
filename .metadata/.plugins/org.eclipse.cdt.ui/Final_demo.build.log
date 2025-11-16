@@ -1,31 +1,10 @@
-02:50:26 **** Incremental Build of configuration Debug for project Final_demo ****
+16:30:42 **** Incremental Build of configuration Debug for project Final_demo ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:149:7: warning: unused variable 'TIM2_Ch2_DCVAL' [-Wunused-variable]
-  149 |   int TIM2_Ch2_DCVAL = 0;
-      |       ^~~~~~~~~~~~~~
-../Core/Src/main.c:148:7: warning: unused variable 'TIM2_Ch1_DCVAL' [-Wunused-variable]
-  148 |   int TIM2_Ch1_DCVAL = 0;
-      |       ^~~~~~~~~~~~~~
-../Core/Src/main.c:119:12: warning: unused variable 'dist' [-Wunused-variable]
-  119 |   uint16_t dist = 0;
-      |            ^~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:905:13: warning: 'send_rpm_tick' defined but not used [-Wunused-function]
-  905 | static void send_rpm_tick(void)
-      |             ^~~~~~~~~~~~~
-arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Final_demo.elf
- 
 arm-none-eabi-size  Final_demo.elf 
-arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
    text	   data	    bss	    dec	    hex	filename
-  25708	     92	   2404	  28204	   6e2c	Final_demo.elf
+  27692	     92	   2620	  30404	   76c4	Final_demo.elf
 Finished building: default.size.stdout
  
-Finished building: Final_demo.list
- 
 
-02:50:28 Build Finished. 0 errors, 4 warnings. (took 1s.397ms)
+16:30:42 Build Finished. 0 errors, 0 warnings. (took 331ms)
 
