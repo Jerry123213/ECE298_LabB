@@ -36,6 +36,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 #define PIPELINE_NUM 4
+#define MIN_DEPTH 100
+#define MAX_DEPTH 1500
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -54,6 +56,14 @@ volatile uint8_t clock_mins = 0;
 
 volatile uint8_t wall_clock_hr_update_flag = 0;
 
+// hcsr04 variables
+volatile uint8_t hcsr04_Rx_flag = 0;
+volatile uint8_t first_edge = 0;
+volatile uint16_t time_edge1 = 0;
+volatile uint16_t time_edge2 = 0;
+
+volatile uint16_t time_diff = 0;
+uint8_t ultrasonic_msg_buffer[64] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,7 +76,8 @@ static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
-
+uint16_t getDistance();
+void HCSR04_TRIG_PULSE(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,6 +102,10 @@ int main(void)
 
 	char clk_label[128] = {0};
 	char clk_msg_buffer[64] = {0};
+	char irrigation_done_msg[64] = {0};
+
+
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -99,6 +114,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  uint16_t dist = 0;
 
   /* USER CODE END Init */
 
@@ -193,7 +209,7 @@ int main(void)
 	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
 	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
 
-	  clock_mins = 0; clock_hours = 0;
+	  clock_mins = 0; clock_hours = -1;
 	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
 	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
 
@@ -210,9 +226,23 @@ int main(void)
 		  if (wall_clock_hr_update_flag) {
 		  	  wall_clock_hr_update_flag = 0;
 
+<<<<<<< Updated upstream
 			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d |",  counter, OutputData[counter].value, OutputData[counter].pwm);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
+=======
+
+
+			  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
+			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
+
+			  if (clock_hours == 24) {
+				  sprintf(irrigation_done_msg, "\r\n Irrigation completed. " );
+				  HAL_UART_Transmit(&huart2, (uint8_t *)irrigation_done_msg, strlen(irrigation_done_msg), HAL_MAX_DELAY);
+				  // I would add a while loop as the "end". Not the most efficient though.
+				  while (1) {}
+			  }
+>>>>>>> Stashed changes
 		  }
 
     /* USER CODE BEGIN 3 */
@@ -650,6 +680,13 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HCSR04_TRIG_PULSE(void) {
+		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_SET);
+		for (int i = 0; i != 15; i = i + 1) {};
+		HAL_GPIO_WritePin(HCSR04_TRIG_GPIO_Port, HCSR04_TRIG_Pin, GPIO_PIN_RESET);
+	}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART2)
@@ -697,6 +734,22 @@ void format_time(output output_data[24], Pipeline pipeline[4]) {
 	}
 }
 
+uint16_t getDistance()
+{
+	hcsr04_Rx_flag = 0;
+	first_edge = 0;
+	time_edge1 = 0;
+	time_edge2 = 0;
+	time_diff = 0;
+
+	HCSR04_TRIG_PULSE();
+
+	while (hcsr04_Rx_flag == 0) {};
+
+	time_diff = time_edge2 - time_edge1;
+
+	return time_diff;
+}
 /* USER CODE END 4 */
 
 /**
