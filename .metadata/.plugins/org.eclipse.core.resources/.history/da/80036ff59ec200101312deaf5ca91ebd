@@ -235,9 +235,18 @@ int main(void)
 				  OutputData[counter].pwm = (ADC_CH9 * 100)/255;
 		  	  }
 
+<<<<<<< Updated upstream
 			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d |",  counter, OutputData[counter].value, OutputData[counter].pwm);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
+<<<<<<< HEAD
+=======
+=======
+
+>>>>>>> eca2aa5f25a134cc9efd3ef99edeff5db7ec2489
+
+			  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
+			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 
 			  if (clock_hours == 24) {
 				  sprintf(irrigation_done_msg, "\r\n Irrigation completed. " );
@@ -245,7 +254,10 @@ int main(void)
 				  // I would add a while loop as the "end". Not the most efficient though.
 				  while (1) {}
 			  }
-
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> eca2aa5f25a134cc9efd3ef99edeff5db7ec2489
 		  }
 
     /* USER CODE BEGIN 3 */
@@ -737,7 +749,7 @@ void format_time(output output_data[24], Pipeline pipeline[4]) {
 	}
 }
 
-
+<<<<<<< HEAD
 void ADC_Select_CH(int CH)
 {
 	ADC_ChannelConfTypeDef sConfig = {0};
@@ -875,7 +887,8 @@ void ADC_Select_CH(int CH)
 	}
 }
 
-
+=======
+>>>>>>> eca2aa5f25a134cc9efd3ef99edeff5db7ec2489
 uint16_t getDistance()
 {
 	hcsr04_Rx_flag = 0;

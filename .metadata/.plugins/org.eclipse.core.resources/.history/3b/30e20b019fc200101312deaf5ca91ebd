@@ -737,7 +737,7 @@ void format_time(output output_data[24], Pipeline pipeline[4]) {
 	}
 }
 
-
+<<<<<<< HEAD
 void ADC_Select_CH(int CH)
 {
 	ADC_ChannelConfTypeDef sConfig = {0};
@@ -875,7 +875,8 @@ void ADC_Select_CH(int CH)
 	}
 }
 
-
+=======
+>>>>>>> eca2aa5f25a134cc9efd3ef99edeff5db7ec2489
 uint16_t getDistance()
 {
 	hcsr04_Rx_flag = 0;
