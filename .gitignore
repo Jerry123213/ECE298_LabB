@@ -1,0 +1,10 @@
+# Eclipse workspace metadata
+.metadata/
+*.pdom
+*.pdo
+
+# Other common ignores
+*.o
+*.exe
+*.log
+build/
