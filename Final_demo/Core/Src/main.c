@@ -195,14 +195,18 @@ int main(void)
 	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
 	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
 
+	  clock_mins = 0; clock_hours = 0;
 	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
 	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
-	  // Continuously print
-	  if (wall_clock_hr_update_flag) {
-	  		  wall_clock_hr_update_flag = 0;
 
-	  		  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
-	  		  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
+	  while (1) {
+		  // Continuously print
+		  if (wall_clock_hr_update_flag) {
+		  	  wall_clock_hr_update_flag = 0;
+
+			  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
+			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
+		  }
 	  }
     /* USER CODE END WHILE */
 
@@ -659,9 +663,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if (clock_mins == 60) {
 			clock_hours += 1;
 			clock_mins = 0;
+			wall_clock_hr_update_flag = 1;
 		}
-
-		wall_clock_hr_update_flag = 1;
 	}
 
 }
