@@ -46,10 +46,15 @@ ADC_HandleTypeDef hadc1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim5;
 
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+volatile uint8_t clock_hours = 0;
+volatile uint8_t clock_mins = 0;
+
+volatile uint8_t wall_clock_hr_update_flag = 0;
 
 /* USER CODE END PV */
 
@@ -61,6 +66,7 @@ static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -84,6 +90,9 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
 	uint8_t txd_msg_buffer[128] = {0};
+
+	char clk_label[128] = {0};
+	char clk_msg_buffer[64] = {0};
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -109,7 +118,11 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim5);
+  clock_hours = 0;
+  clock_mins = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -181,6 +194,16 @@ int main(void)
 
 	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
 	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+
+	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
+	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
+	  // Continuously print
+	  if (wall_clock_hr_update_flag) {
+	  		  wall_clock_hr_update_flag = 0;
+
+	  		  sprintf(clk_msg_buffer, "\r\n %02u ", clock_hours );
+	  		  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -463,6 +486,51 @@ static void MX_TIM4_Init(void)
 }
 
 /**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM5_Init(void)
+{
+
+  /* USER CODE BEGIN TIM5_Init 0 */
+
+  /* USER CODE END TIM5_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM5_Init 1 */
+
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 5333-1;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 1000-1;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM5_Init 2 */
+
+  /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -580,6 +648,22 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		rcv_intpt_flag = 1;
 		value = byte - 48;
 	}
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if ((htim->Instance == TIM5))
+	{
+		wall_clock_hr_update_flag = 0;
+		clock_mins += 1;
+		if (clock_mins == 60) {
+			clock_hours += 1;
+			clock_mins = 0;
+		}
+
+		wall_clock_hr_update_flag = 1;
+	}
+
 }
 
 /* USER CODE END 4 */

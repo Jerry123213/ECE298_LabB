@@ -60,8 +60,8 @@ all: main-build
 main-build: Final_demo.elf secondary-outputs
 
 # Tool invocations
-Final_demo.elf Final_demo.map: $(OBJS) $(USER_OBJS) C:\ECE\ 298\ Lab\ B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Final_demo.elf Final_demo.map: $(OBJS) $(USER_OBJS) C:\Users\annik\ece298\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\annik\ece298\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
