@@ -21,8 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h>
-#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -77,8 +75,8 @@ volatile uint8_t byte;
 volatile uint8_t value;
 uint8_t rcv_intpt_flag = 0;
 
-struct Pipeline pipeline[PIPELINE_NUM];
-
+Pipeline pipeline[PIPELINE_NUM];
+output OutputData[23];
 /* USER CODE END 0 */
 
 /**
@@ -666,7 +664,30 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			wall_clock_hr_update_flag = 1;
 		}
 	}
+}
 
+void format_time(output output_data[24], Pipeline pipeline[4]) {
+	for (int i = 0; i < PIPELINE_NUM; i++) {
+		for (int j = pipeline[i].first_time; j <= pipeline[i].last_time; j++) {
+			output_data[j].value = '0' + pipeline[i].value;
+
+			switch(pipeline[i].pwm) {
+				case 0:
+					output_data[j].pwm = 0;
+					break;
+				case 1:
+					output_data[j].pwm = 70;
+					break;
+				case 2:
+					output_data[j].pwm = 85;
+					break;
+				case 3:
+					output_data[j].pwm = 99;
+					break;
+
+			}
+		}
+	}
 }
 
 /* USER CODE END 4 */

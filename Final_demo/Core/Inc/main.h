@@ -31,17 +31,23 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-struct Pipeline {
+typedef struct {
 	uint8_t value;
 	uint8_t pwm;
 	uint8_t first_time;
 	uint8_t last_time;
-};
+} Pipeline;
+
+typedef struct {
+	uint8_t value;
+	uint8_t pwm;
+} output;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -60,7 +66,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void format_time(output output_data[24], Pipeline pipeline[4]);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
