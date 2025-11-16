@@ -235,9 +235,6 @@ int main(void)
 
 	  while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)) {}
 
-	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
-	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
-
 	  clock_mins = 0; clock_hours = 0;
 	  sprintf( clk_label, "\r\n Wall Clk | Zone/Inlet | Motor Speed PWM | Motor RPM | Reservoir Water Depth ");
 	  HAL_UART_Transmit(&huart2, (uint8_t *)clk_label, strlen(clk_label), HAL_MAX_DELAY);
@@ -811,14 +808,32 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+volatile char uart_buf[3];  // max 2 digits + null terminator
+volatile uint8_t uart_index = 0;
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART2)
 	{
 		HAL_UART_Transmit(&huart2, &byte, 1, 100);
-		rcv_intpt_flag = 1;
-		value = byte - 48;
+
+		if (byte >= '0' && byte <= '9') {
+			if (uart_index < 2) {
+				uart_index++;
+				uart_buf[uart_index] = byte;
+			}
+		}
+		else if (byte == '\r' || byte == '\n')
+		{
+			// end of input, convert to integer
+			uart_buf[uart_index] = '\0';  // null-terminate
+			value = atoi((char*)uart_buf);  // convert to number
+			uart_index = 0;                 // reset for next input
+			rcv_intpt_flag = 1;             // signal that value is ready
+		}
 	}
+	// continue receiving
+	HAL_UART_Receive_IT(&huart2, &byte, 1);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -1045,7 +1060,7 @@ uint16_t get_rpm(void)
 	return rpm;
 }
 
-void print_empty_error (void) {
+void print_empty_error(void) {
 	sprintf((char*)txd_msg_buffer, "\r\n *********************************" );
 	HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), HAL_MAX_DELAY);
 

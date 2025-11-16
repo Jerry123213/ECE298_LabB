@@ -1,10 +1,28 @@
-16:30:42 **** Incremental Build of configuration Debug for project Final_demo ****
+17:37:57 **** Incremental Build of configuration Debug for project Final_demo ****
 make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:314:35: warning: implicit declaration of function 'print_empty_error' [-Wimplicit-function-declaration]
+  314 |                                   print_empty_error();
+      |                                   ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:1063:6: warning: conflicting types for 'print_empty_error'; have 'void(void)'
+ 1063 | void print_empty_error(void) {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:314:35: note: previous implicit declaration of 'print_empty_error' with type 'void(void)'
+  314 |                                   print_empty_error();
+      |                                   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
 arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
    text	   data	    bss	    dec	    hex	filename
-  27692	     92	   2620	  30404	   76c4	Final_demo.elf
+  28752	     92	   2620	  31464	   7ae8	Final_demo.elf
 Finished building: default.size.stdout
  
+Finished building: Final_demo.list
+ 
 
-16:30:42 Build Finished. 0 errors, 0 warnings. (took 331ms)
+17:37:58 Build Finished. 0 errors, 2 warnings. (took 824ms)
 
