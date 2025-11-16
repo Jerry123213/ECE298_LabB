@@ -60,8 +60,8 @@ all: main-build
 main-build: Servo_Test.elf secondary-outputs
 
 # Tool invocations
-Servo_Test.elf Servo_Test.map: $(OBJS) $(USER_OBJS) C:\Users\annik\STM32CubeIDE\workspace_1.19.0\Servo_Test\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Servo_Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\annik\STM32CubeIDE\workspace_1.19.0\Servo_Test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Servo_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Servo_Test.elf Servo_Test.map: $(OBJS) $(USER_OBJS) C:\ECE\ 298\ Lab\ B\ECE298_LabB\Servo_Test\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Servo_Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Servo_Test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Servo_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

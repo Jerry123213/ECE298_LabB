@@ -60,8 +60,8 @@ all: main-build
 main-build: RPM_Speed_Sensor_Test.elf secondary-outputs
 
 # Tool invocations
-RPM_Speed_Sensor_Test.elf RPM_Speed_Sensor_Test.map: $(OBJS) $(USER_OBJS) C:\Users\annik\STM32CubeIDE\workspace_1.19.0\RPM_Speed_Sensor_Test\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RPM_Speed_Sensor_Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\annik\STM32CubeIDE\workspace_1.19.0\RPM_Speed_Sensor_Test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RPM_Speed_Sensor_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+RPM_Speed_Sensor_Test.elf RPM_Speed_Sensor_Test.map: $(OBJS) $(USER_OBJS) C:\ECE\ 298\ Lab\ B\ECE298_LabB\RPM_Speed_Sensor_Test\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "RPM_Speed_Sensor_Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\RPM_Speed_Sensor_Test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RPM_Speed_Sensor_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

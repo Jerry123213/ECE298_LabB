@@ -97,6 +97,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -218,7 +228,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
-  HAL_GPIO_WritePin(GPIOA, LD2_PIN|BLU_Pin|RED_Pin|GRN_Pin);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|BLU_Pin|RED_Pin|GRN_Pin, GPIO_PIN_SET);
   /* USER CODE END MX_GPIO_Init_2 */
 }
 

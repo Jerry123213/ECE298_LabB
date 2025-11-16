@@ -127,10 +127,7 @@ void HCSR04_TRIG_PULSE(void) {
 
 	  HCSR04_TRIG_PULSE();
 
-	  while (hcsr04_Rx_flag == 0) {
-
-		  //HAL_Delay(25);
-	  };
+	  while (hcsr04_Rx_flag == 0) {};
 
 	  time_diff = time_edge2 - time_edge1;
 
@@ -141,6 +138,8 @@ void HCSR04_TRIG_PULSE(void) {
 
 	  sprintf((char*)txd_msg_buffer, "DISTANCE TO OBJECT: %d \r\n", distance);
 	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 100);
+
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

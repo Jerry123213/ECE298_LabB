@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,7 +37,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define PIPELINE_NUM 4
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -66,6 +67,11 @@ static void MX_TIM4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+volatile uint8_t byte;
+volatile uint8_t value;
+uint8_t rcv_intpt_flag = 0;
+
+struct Pipeline pipeline[PIPELINE_NUM];
 
 /* USER CODE END 0 */
 
@@ -77,7 +83,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	uint8_t txd_msg_buffer[128] = {0};
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -104,13 +110,77 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  // START SYSTEM MODE HERE
+	  sprintf((char*)txd_msg_buffer, "\r\n Enter SETUP Parameters:");
+	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+
+
+	  for (int i = 0; i < PIPELINE_NUM; i++) {
+		  rcv_intpt_flag = 00; // usd to see if receiver interrupt has occured
+		  HAL_UART_Receive_IT(&huart2, &byte, 1); // enables receiver to create interrupt when character arrives. it's placed in "byte"
+
+		  sprintf((char*)txd_msg_buffer, "\r\n PIPELINE (options: 0 to 3): ");
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+		  while( rcv_intpt_flag == (00) ) {}
+
+		  pipeline[i].value = value;
+		  sprintf((char*)txd_msg_buffer, "\r\n value: %d", pipeline[i].value);
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+
+		  rcv_intpt_flag = 00; // usd to see if receiver interrupt has occured
+		  HAL_UART_Receive_IT(&huart2, &byte, 1); // enables receiver to create interrupt when character arrives. it's placed in "byte"
+
+		  sprintf((char*)txd_msg_buffer, "\r\n Pump PWM (options: 0 to 3): ");
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+		  while( rcv_intpt_flag == (00) ) {}
+
+		  pipeline[i].pwm = value;
+	  }
+
+	  for (int i = 0; i < PIPELINE_NUM; i++) {
+		  rcv_intpt_flag = 00; // usd to see if receiver interrupt has occured
+		  HAL_UART_Receive_IT(&huart2, &byte, 1); // enables receiver to create interrupt when character arrives. it's placed in "byte"
+
+		  sprintf((char*)txd_msg_buffer, "\r\n Pipeline %d	Pump FIRST HOUR (options: 00 to 23): ", i);
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+		  while( rcv_intpt_flag == (00) ) {}
+
+		  pipeline[i].first_time = value;
+
+		  rcv_intpt_flag = 00; // usd to see if receiver interrupt has occured
+		  HAL_UART_Receive_IT(&huart2, &byte, 1); // enables receiver to create interrupt when character arrives. it's placed in "byte"
+
+		  sprintf((char*)txd_msg_buffer, "\r\n Pipeline %d	Pump LAST HOUR (options: 00 to 23): ", i);
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+		  while( rcv_intpt_flag == (00) ) {}
+
+		  pipeline[i].last_time = value;
+	  }
+
+	  sprintf((char*)txd_msg_buffer, "\r\n Printing SETUP Parameters");
+	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+	  sprintf((char*)txd_msg_buffer, "\r\n CURRENT WALL CLOCK HOUR 0");
+	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+
+	  for (int i = 0; i < PIPELINE_NUM; i++) {
+		  sprintf((char*)txd_msg_buffer, "\r\n PIPELINE: %d	 Pump PWM: %d  Pump FIRST HOUR: %d  Pump LAST HOUR: %d\n", pipeline[i].value, pipeline[i].pwm, pipeline[i].first_time, pipeline[i].last_time);
+		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+	  }
+
+
+	  sprintf((char*)txd_msg_buffer, "\r\n SETUP is done. Press Blue Button for RUN MODE");
+	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
+
+	  while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)) {}
+
+	  sprintf((char*)txd_msg_buffer, "\r\n YOO");
+	  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -502,6 +572,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART2)
+	{
+		HAL_UART_Transmit(&huart2, &byte, 1, 100);
+		rcv_intpt_flag = 1;
+		value = byte - 48;
+	}
+}
 
 /* USER CODE END 4 */
 

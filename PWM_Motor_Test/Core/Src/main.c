@@ -93,7 +93,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_BASE_Init(&htim3);
+  HAL_TIM_Base_Init(&htim3);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
 
@@ -111,25 +111,25 @@ int main(void)
   while (1)
   {
 	  while(TIM3_Ch1_DCVAL < 2000) {
-		  TIM3_Ch1_DCVAL += (100);
+		  TIM3_Ch1_DCVAL += (200);
 		  TIM3 -> CCR1 = TIM3_Ch1_DCVAL;
 		  HAL_Delay(5000);
 	  }
 
 	  while(TIM3_Ch1_DCVAL > 0) {
-		  TIM_Ch1_DCVAL -= (100);
+		  TIM3_Ch1_DCVAL -= (200);
 		  TIM3 -> CCR1 = TIM3_Ch1_DCVAL;
 		  HAL_Delay(5000);
 	  }
 
 	  while(TIM3_Ch3_DCVAL < 2000) {
-		 TIM3_Ch3_DCVAL += (100);
+		 TIM3_Ch3_DCVAL += (200);
 		 TIM3 -> CCR3 = TIM3_Ch3_DCVAL;
 		 HAL_Delay(5000);
 	  }
 
-	  while(TIM_Ch3_DCVAL > 0) {
-		  TIM_Ch3_DCVAL -= (100);
+	  while(TIM3_Ch3_DCVAL > 0) {
+		  TIM3_Ch3_DCVAL -= (200);
 		  TIM3 -> CCR3 = TIM3_Ch3_DCVAL;
 		  HAL_Delay(5000);
 	  }
