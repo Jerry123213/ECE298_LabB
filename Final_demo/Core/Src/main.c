@@ -58,6 +58,10 @@ volatile uint8_t clock_mins = 0;
 volatile uint8_t wall_clock_hr_update_flag = 0;
 volatile uint16_t rpm_tick_count = 0;
 
+volatile uint16_t rpm_tick_count1 = 0;
+volatile uint16_t rpm_tick_count2 = 0;
+volatile uint16_t rpm_tick_count_diff = 0;
+
 uint8_t ultrasonic_msg_buffer[64] = {0};
 /* USER CODE END PV */
 
@@ -78,7 +82,7 @@ static void MX_TIM9_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t byte;
-uint8_t value;
+uint16_t value;
 uint8_t rcv_intpt_flag = 0;
 volatile uint8_t rpm_time_out = 0;
 
@@ -168,6 +172,13 @@ int main(void)
   HAL_TIM_Base_Start(&htim3);
   HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
 
+  HAL_TIM_Base_Init(&htim9);
+  HAL_TIM_Base_Start(&htim9);
+
+//  HAL_NVIC_SetPriority(TIM1_BRK_TIM9_IRQn, 0, 0);
+//  HAL_NVIC_EnableIRQ(TIM1_BRK_TIM9_IRQn);
+
+
   clock_hours = 0;
   clock_mins = 0;
 
@@ -191,6 +202,7 @@ int main(void)
 		  while( rcv_intpt_flag == (00) ) {}
 
 		  pipeline[i].value = value;
+
 		  sprintf((char*)txd_msg_buffer, "\r\n value: %d", pipeline[i].value);
 		  HAL_UART_Transmit(&huart2, txd_msg_buffer, strlen((char*)txd_msg_buffer), 1000);
 
@@ -250,6 +262,7 @@ int main(void)
 	  }
 
 	  format_time(OutputData, pipeline);
+	  wall_clock_hr_update_flag = 1;
 
 	  uint8_t counter = 0;
 	  while (1) {
@@ -273,27 +286,28 @@ int main(void)
 		  	  // set motor PWM and LED color
 		  	  HAL_GPIO_WritePin(GPIOA, BLU_Pin|GRN_Pin|RED_Pin, GPIO_PIN_RESET);
 
-		  	  if (OutputData[counter].value == 0) {
+		  	  if (OutputData[counter].value == 0 + '0') {
 		  		  TIM2 -> CCR2 = 0;
 			  	  TIM2 -> CCR1 = (TIM2 -> ARR + 1) * OutputData[counter].pwm / 100;
 			  	  // set LED to purple
 			  	  HAL_GPIO_WritePin(GPIOA, BLU_Pin|RED_Pin, GPIO_PIN_SET);
+			  	  servo_write_angle(0);
 		  	  }
 		  	  else {
 		  		  TIM2 -> CCR1 = 0;
 		  		  TIM2 -> CCR2 = (TIM2 -> ARR + 1) * OutputData[counter].pwm / 100;
 		  		  switch (OutputData[counter].value) {
-		  		  	  case(1):
+		  		  	  case(1 + '0'):
 						HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(45);
+		  		  	  	servo_write_angle(55);
 		  		  	  	break;
-		  		  	  case(2):
+		  		  	  case(2 + '0'):
 						HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(90);
+		  		  	  	servo_write_angle(110);
 		  		  	  	break;
-		  		  	  case(3):
+		  		  	  case(3 + '0'):
 						HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(135);
+		  		  	  	servo_write_angle(165);
 		  		  	  	break;
 		  		  }
 		  	  }
@@ -309,9 +323,17 @@ int main(void)
 
 		  	  while (hcsr04_Rx_flag == 0) {};
 
+//			time_diff = time_edge2 - time_edge1;
+//			distance = time_diff/29;
+//			distance = 100*((30-distance)/25);
+
 		  	  time_diff = time_edge2 - time_edge1;
-		  	  distance = time_diff/58;
-		  	  distance = 120-(distance*10);
+		  	  float temp = time_diff/58.0;
+		  	  distance = 120-(temp * 10);
+
+		  	  if (distance > 99) {
+		  		  distance = 99;
+		  	  }
 
 		  	  uint8_t tens = distance / 10;
 		  	  uint8_t ones = distance % 10;
@@ -326,11 +348,11 @@ int main(void)
 		  	  // read current rpm
 		  	  uint16_t rpm = get_rpm();
 
-			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, rpm, distance);
+			  sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, 0, distance);
 			  HAL_UART_Transmit(&huart2, (uint8_t *)clk_msg_buffer, strlen(clk_msg_buffer), HAL_MAX_DELAY);
 			  counter++;
 
-			  if (clock_hours == 23) {
+			  if (clock_hours == 24) {
 				  sprintf(irrigation_done_msg, "\r\n Irrigation completed. " );
 				  HAL_UART_Transmit(&huart2, (uint8_t *)irrigation_done_msg, strlen(irrigation_done_msg), HAL_MAX_DELAY);
 				  break;
@@ -687,7 +709,7 @@ static void MX_TIM9_Init(void)
   htim9.Instance = TIM9;
   htim9.Init.Prescaler = 16000-1;
   htim9.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim9.Init.Period = 1000-1;
+  htim9.Init.Period = 5000-1;
   htim9.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim9.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim9) != HAL_OK)
@@ -758,7 +780,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|BLU_Pin|GRN_Pin|RED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|GRN_Pin|BLU_Pin|RED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, DIGIT_A2_Pin|DIGIT_B0_Pin|DIGIT_B1_Pin|DIGIT_B2_Pin, GPIO_PIN_RESET);
@@ -775,8 +797,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin BLU_Pin GRN_Pin RED_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|BLU_Pin|GRN_Pin|RED_Pin;
+  /*Configure GPIO pins : LD2_Pin GRN_Pin BLU_Pin RED_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|GRN_Pin|BLU_Pin|RED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -827,8 +849,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 		if (byte >= '0' && byte <= '9') {
 			if (uart_index < 2) {
-				uart_index++;
 				uart_buf[uart_index] = byte;
+				uart_index++;
 			}
 		}
 		else if (byte == '\r' || byte == '\n')
@@ -1048,23 +1070,33 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 uint16_t get_rpm(void)
 {
-	__disable_irq();
+	HAL_NVIC_DisableIRQ(EXTI2_IRQn); // disable the interrupts coming from the rpm sensor.
+	HAL_TIM_Base_Stop_IT(&htim9); // stop the Tim2 counting.
+
 	rpm_tick_count = 0;
+	rpm_tick_count1 = 0;
+	rpm_tick_count2 = 0;
+	rpm_tick_count_diff = 0;
 	rpm_time_out = 0;
 
-	TIM9 -> PSC = 16000 - 1;
-	TIM9 -> ARR = 1000 - 1;
-	HAL_TIM_Base_Start_IT(&htim9);
-	__enable_irq();
+	TIM9 -> ARR = 5000 - 1;
 
+	HAL_TIM_Base_Start_IT(&htim9);
 	HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
+	rpm_tick_count1 = rpm_tick_count;
 
 	while(rpm_time_out == 0) {}
 
-	HAL_NVIC_DisableIRQ(EXTI2_IRQn);
-	HAL_TIM_Base_Stop_IT(&htim9);
+	rpm_tick_count2 = rpm_tick_count;
 
-	uint32_t rpm = rpm_tick_count * 3;
+	HAL_NVIC_DisableIRQ(EXTI2_IRQn);
+	HAL_TIM_Base_Stop_IT(&htim9)	;
+
+	rpm_time_out = 0;
+	rpm_tick_count_diff = (rpm_tick_count2 - rpm_tick_count1);
+	int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+	uint16_t rpm = rpm_tick_count / 20;
 	return rpm;
 }
 
@@ -1171,16 +1203,16 @@ void DIGITS_Display(uint8_t DIGIT_A, uint8_t DIGIT_B)
 
 void servo_write_angle(uint8_t angle)
 {
-    // Clamp angle to the valid range
+    // Clamp input (servos generally don't accept >180 anyway)
     if (angle > 180) angle = 180;
 
-    // Convert angle to pulse width (1000–2000 µs)
-    uint16_t pulse = 1000 + ((angle * 1000) / 180);
+    // Convert angle to pulse width
+    // Use 32-bit math to prevent overflow: (angle * 1000)
+    uint32_t pulse_us = 1000 + ((uint32_t)angle * 1000) / 180;
 
-    // Set PWM duty cycle
-    TIM4->CCR2 = pulse;
+    // Timer runs at 1 MHz (1 tick = 1 µs), so CCR2 = pulse in µs
+    TIM4->CCR2 = (uint16_t)pulse_us;
 }
-
 /* USER CODE END 4 */
 
 /**

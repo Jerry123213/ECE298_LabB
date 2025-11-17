@@ -41,8 +41,8 @@ extern "C" {
 typedef struct {
 	uint8_t value;
 	uint8_t pwm;
-	uint8_t first_time;
-	uint8_t last_time;
+	uint16_t first_time;
+	uint16_t last_time;
 } Pipeline;
 
 typedef struct {
@@ -89,10 +89,10 @@ void servo_write_angle(uint8_t angle);
 #define RPM_Tick_GPIO_Port GPIOB
 #define DIGIT_A2_Pin GPIO_PIN_8
 #define DIGIT_A2_GPIO_Port GPIOC
-#define BLU_Pin GPIO_PIN_8
-#define BLU_GPIO_Port GPIOA
-#define GRN_Pin GPIO_PIN_11
+#define GRN_Pin GPIO_PIN_8
 #define GRN_GPIO_Port GPIOA
+#define BLU_Pin GPIO_PIN_11
+#define BLU_GPIO_Port GPIOA
 #define RED_Pin GPIO_PIN_12
 #define RED_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13

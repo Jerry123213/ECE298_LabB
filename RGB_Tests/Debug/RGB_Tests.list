@@ -408,7 +408,7 @@ int main(void)
   {
 	HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_RESET);
  8000514:	2200      	movs	r2, #0
- 8000516:	f44f 6100 	mov.w	r1, #2048	@ 0x800
+ 8000516:	f44f 7180 	mov.w	r1, #256	@ 0x100
  800051a:	4817      	ldr	r0, [pc, #92]	@ (8000578 <main+0x78>)
  800051c:	f000 fd1c 	bl	8000f58 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
@@ -426,7 +426,7 @@ int main(void)
  800053c:	f000 fd0c 	bl	8000f58 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
  8000540:	2201      	movs	r2, #1
- 8000542:	f44f 7180 	mov.w	r1, #256	@ 0x100
+ 8000542:	f44f 6100 	mov.w	r1, #2048	@ 0x800
  8000546:	480c      	ldr	r0, [pc, #48]	@ (8000578 <main+0x78>)
  8000548:	f000 fd06 	bl	8000f58 <HAL_GPIO_WritePin>
 	HAL_Delay(500);
@@ -434,12 +434,12 @@ int main(void)
  8000550:	f000 fa74 	bl	8000a3c <HAL_Delay>
 	HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_RESET);
  8000554:	2200      	movs	r2, #0
- 8000556:	f44f 7180 	mov.w	r1, #256	@ 0x100
+ 8000556:	f44f 6100 	mov.w	r1, #2048	@ 0x800
  800055a:	4807      	ldr	r0, [pc, #28]	@ (8000578 <main+0x78>)
  800055c:	f000 fcfc 	bl	8000f58 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
  8000560:	2201      	movs	r2, #1
- 8000562:	f44f 6100 	mov.w	r1, #2048	@ 0x800
+ 8000562:	f44f 7180 	mov.w	r1, #256	@ 0x100
  8000566:	4804      	ldr	r0, [pc, #16]	@ (8000578 <main+0x78>)
  8000568:	f000 fcf6 	bl	8000f58 <HAL_GPIO_WritePin>
 	HAL_Delay(500);
@@ -731,7 +731,7 @@ static void MX_GPIO_Init(void)
  800072c:	687b      	ldr	r3, [r7, #4]
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|BLU_Pin|GRN_Pin|RED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|GRN_Pin|BLU_Pin|RED_Pin, GPIO_PIN_RESET);
  800072e:	2200      	movs	r2, #0
  8000730:	f44f 51c9 	mov.w	r1, #6432	@ 0x1920
  8000734:	4815      	ldr	r0, [pc, #84]	@ (800078c <MX_GPIO_Init+0xe4>)
@@ -753,8 +753,8 @@ static void MX_GPIO_Init(void)
  8000750:	480f      	ldr	r0, [pc, #60]	@ (8000790 <MX_GPIO_Init+0xe8>)
  8000752:	f000 fa7d 	bl	8000c50 <HAL_GPIO_Init>
 
-  /*Configure GPIO pins : LD2_Pin BLU_Pin GRN_Pin RED_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|BLU_Pin|GRN_Pin|RED_Pin;
+  /*Configure GPIO pins : LD2_Pin GRN_Pin BLU_Pin RED_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|GRN_Pin|BLU_Pin|RED_Pin;
  8000756:	f44f 53c9 	mov.w	r3, #6432	@ 0x1920
  800075a:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;

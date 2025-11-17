@@ -1,10 +1,10 @@
-19:08:55 **** Incremental Build of configuration Debug for project Final_demo ****
+03:21:05 **** Incremental Build of configuration Debug for project Final_demo ****
 make -j16 all 
 arm-none-eabi-size  Final_demo.elf 
    text	   data	    bss	    dec	    hex	filename
-  28888	     92	   2620	  31600	   7b70	Final_demo.elf
+  31316	     92	   2636	  34044	   84fc	Final_demo.elf
 Finished building: default.size.stdout
  
 
-19:08:56 Build Finished. 0 errors, 0 warnings. (took 343ms)
+03:21:05 Build Finished. 0 errors, 0 warnings. (took 401ms)
 

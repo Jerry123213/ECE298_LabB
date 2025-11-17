@@ -1,7 +1,552 @@
-19:08:55 **** Incremental Build of configuration Debug for project Final_demo ****
+01:07:49 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28936	     92	   2628	  31656	   7ba8	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:08:19 **** Incremental Build of configuration Debug for project Final_demo ****
 make -j16 all 
 arm-none-eabi-size  Final_demo.elf 
    text	   data	    bss	    dec	    hex	filename
-  28888	     92	   2620	  31600	   7b70	Final_demo.elf
+  28936	     92	   2628	  31656	   7ba8	Final_demo.elf
+Finished building: default.size.stdout
+ 
+01:12:15 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28932	     92	   2628	  31652	   7ba4	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:16:02 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29052	     92	   2628	  31772	   7c1c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:17:39 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29052	     92	   2628	  31772	   7c1c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:20:05 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29040	     92	   2628	  31760	   7c10	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:26:48 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29040	     92	   2628	  31760	   7c10	Final_demo.elf
+Finished building: default.size.stdout
+ 
+01:34:53 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:37:12 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29056	     92	   2628	  31776	   7c20	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:39:28 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29040	     92	   2628	  31760	   7c10	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:41:35 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:41:49 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+01:41:52 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+01:44:51 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:46:19 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29048	     92	   2628	  31768	   7c18	Final_demo.elf
+Finished building: default.size.stdout
+ 
+01:49:14 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29036	     92	   2628	  31756	   7c0c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:54:20 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29040	     92	   2628	  31760	   7c10	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:57:50 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29040	     92	   2628	  31760	   7c10	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+01:58:54 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29056	     92	   2628	  31776	   7c20	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:11:01 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1067:9: error: 'rpm' undeclared (first use in this function)
+ 1067 |         rpm = 0;
+      |         ^~~
+../Core/Src/main.c:1067:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:1089:9: error: 'rpm_tick_per_min' undeclared (first use in this function)
+ 1089 |         rpm_tick_per_min = rpm_tick_count_diff * y;
+      |         ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:1089:50: error: 'y' undeclared (first use in this function)
+ 1089 |         rpm_tick_per_min = rpm_tick_count_diff * y;
+      |                                                  ^
+../Core/Src/main.c:1092:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 1092 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+02:11:17 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1067:9: error: 'rpm' undeclared (first use in this function)
+ 1067 |         rpm = 0;
+      |         ^~~
+../Core/Src/main.c:1067:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:1089:9: error: 'rpm_tick_per_min' undeclared (first use in this function)
+ 1089 |         rpm_tick_per_min = rpm_tick_count_diff * (60/5);
+      |         ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:1092:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 1092 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+02:11:28 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1067:9: error: 'rpm' undeclared (first use in this function)
+ 1067 |         rpm = 0;
+      |         ^~~
+../Core/Src/main.c:1067:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:1089:18: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1089 |         uint16_t rpm_tick_per_min = rpm_tick_count_diff * (60/5);
+      |                  ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:1092:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 1092 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+02:11:43 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1088:18: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1088 |         uint16_t rpm_tick_per_min = rpm_tick_count_diff * (60/5);
+      |                  ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29140	     92	   2636	  31868	   7c7c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:14:25 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1088:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1088 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  29156	     92	   2636	  31884	   7c8c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:15:45 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29156	     92	   2636	  31884	   7c8c	Final_demo.elf
+Finished building: default.size.stdout
+ 
+02:17:40 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:144: error: 'rpm' undeclared (first use in this function)
+  342 |                           sprintf(clk_msg_buffer, "\r\n %d | %c | %d | %d | %d",  counter, OutputData[counter].value, OutputData[counter].pwm, rpm, distance);
+      |                                                                                                                                                ^~~
+../Core/Src/main.c:342:144: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1088:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1088 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+02:17:52 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1088:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1088 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28724	     92	   2628	  31444	   7ad4	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:21:41 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1092:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1092 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28748	     92	   2628	  31468	   7aec	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:24:45 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1092:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1092 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28724	     92	   2628	  31444	   7ad4	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:28:43 **** Clean-only build of configuration Debug for project BCD_Timer_Test ****
+make -j16 clean 
+rm -rf ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.su
+rm -rf ./Core/Startup/startup_stm32f401retx.d ./Core/Startup/startup_stm32f401retx.o
+rm -rf ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
+rm -rf BCD_Timer_Test.elf BCD_Timer_Test.list BCD_Timer_Test.map default.size.stdout
+ 
+02:28:44 **** Build of configuration Debug for project BCD_Timer_Test ****
+make -j16 all 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f401retx.d" -MT"Core/Startup/startup_stm32f401retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32f401retx.o" "../Core/Startup/startup_stm32f401retx.s"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+arm-none-eabi-gcc -o "BCD_Timer_Test.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\BCD_Timer_Test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BCD_Timer_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BCD_Timer_Test.elf
+ 
+arm-none-eabi-size  BCD_Timer_Test.elf 
+arm-none-eabi-objdump -h -S BCD_Timer_Test.elf  > "BCD_Timer_Test.list"
+   text	   data	    bss	    dec	    hex	filename
+   8320	     12	   1644	   9976	   26f8	BCD_Timer_Test.elf
+Finished building: default.size.stdout
+ 
+Finished building: BCD_Timer_Test.list
+ 
+02:30:01 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28724	     92	   2628	  31444	   7ad4	Final_demo.elf
+Finished building: default.size.stdout
+ 
+02:39:10 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1092:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1092 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28724	     92	   2628	  31444	   7ad4	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:45:08 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1093:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1093 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  28732	     92	   2628	  31452	   7adc	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:54:40 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1097:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1097 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  30888	     92	   2628	  33608	   8348	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+02:58:11 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  30888	     92	   2628	  33608	   8348	Final_demo.elf
+Finished building: default.size.stdout
+ 
+03:08:41 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:349:36: warning: unused variable 'rpm' [-Wunused-variable]
+  349 |                           uint16_t rpm = get_rpm();
+      |                                    ^~~
+../Core/Src/main.c: In function 'get_rpm':
+../Core/Src/main.c:1098:13: warning: unused variable 'rpm_tick_per_min' [-Wunused-variable]
+ 1098 |         int rpm_tick_per_min = (float)rpm_tick_count_diff * 10;
+      |             ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  31316	     92	   2636	  34044	   84fc	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+03:10:10 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31316	     92	   2636	  34044	   84fc	Final_demo.elf
+Finished building: default.size.stdout
+ 
+03:14:29 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-gcc -o "Final_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ECE 298 Lab B\ECE298_LabB\Final_demo\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_demo.elf
+ 
+arm-none-eabi-size  Final_demo.elf 
+arm-none-eabi-objdump -h -S Final_demo.elf  > "Final_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+  31316	     92	   2636	  34044	   84fc	Final_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_demo.list
+ 
+03:21:05 **** Incremental Build of configuration Debug for project Final_demo ****
+make -j16 all 
+arm-none-eabi-size  Final_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31316	     92	   2636	  34044	   84fc	Final_demo.elf
 Finished building: default.size.stdout
  
