@@ -70,10 +70,9 @@ void Error_Handler(void);
 void format_time(output output_data[24], Pipeline pipeline[4]);
 void ADC_Select_CH(int CH);
 uint16_t get_rpm(void);
-void print_empty_error(void);
+void print_error_empty(void);
 void ADC_Select_CH(int CH);
 void DIGITS_Display(uint8_t DIGIT_A, uint8_t DIGIT_B);
-void servo_write_angle(uint8_t angle);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

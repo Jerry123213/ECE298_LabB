@@ -285,15 +285,12 @@ int main(void)
 		  		  switch (OutputData[counter].value) {
 		  		  	  case(1):
 						HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(45);
 		  		  	  	break;
 		  		  	  case(2):
 						HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(90);
 		  		  	  	break;
 		  		  	  case(3):
 						HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(135);
 		  		  	  	break;
 		  		  }
 		  	  }

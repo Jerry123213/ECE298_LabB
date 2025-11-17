@@ -157,7 +157,7 @@ int main(void)
   TIM2 -> CCR2 = 0;
 
   HAL_TIM_Base_Start(&htim4);
-  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 
   TIM4->PSC = 16-1;
   TIM4->ARR = 20000-1;
@@ -285,15 +285,12 @@ int main(void)
 		  		  switch (OutputData[counter].value) {
 		  		  	  case(1):
 						HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(45);
 		  		  	  	break;
 		  		  	  case(2):
 						HAL_GPIO_WritePin(GPIOA, GRN_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(90);
 		  		  	  	break;
 		  		  	  case(3):
 						HAL_GPIO_WritePin(GPIOA, BLU_Pin, GPIO_PIN_SET);
-		  		  	  	servo_write_angle(135);
 		  		  	  	break;
 		  		  }
 		  	  }
@@ -1168,19 +1165,6 @@ void DIGITS_Display(uint8_t DIGIT_A, uint8_t DIGIT_B)
 
 	 }
 }
-
-void servo_write_angle(uint8_t angle)
-{
-    // Clamp angle to the valid range
-    if (angle > 180) angle = 180;
-
-    // Convert angle to pulse width (1000–2000 µs)
-    uint16_t pulse = 1000 + ((angle * 1000) / 180);
-
-    // Set PWM duty cycle
-    TIM4->CCR2 = pulse;
-}
-
 /* USER CODE END 4 */
 
 /**
